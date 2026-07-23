@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+        --background: 0 0% 100%;
+        --foreground: 20 14.3% 4.1%;
+        --card: 0 0% 100%;
+        --card-foreground: 20 14.3% 4.1%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 20 14.3% 4.1%;
+        --primary: 24 100% 50%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 24 30% 96%;
+        --secondary-foreground: 24 100% 20%;
+        --muted: 24 30% 96%;
+        --muted-foreground: 25 5.3% 44.7%;
+        --accent: 24 30% 96%;
+        --accent-foreground: 24 100% 20%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 24 20% 88%;
+        --input: 24 20% 88%;
+        --ring: 24 100% 50%;
+        --radius: 0.5rem;
+    }
+    
+  .dark {
+        --background: 20 14.3% 4.1%;
+        --foreground: 0 0% 95%;
+        --card: 24 9.8% 10%;
+        --card-foreground: 0 0% 95%;
+        --popover: 24 9.8% 10%;
+        --popover-foreground: 0 0% 95%;
+        --primary: 24 100% 50%;
+        --primary-foreground: 0 0% 9%;
+        --secondary: 24 9.8% 15%;
+        --secondary-foreground: 0 0% 95%;
+        --muted: 24 9.8% 15%;
+        --muted-foreground: 24 5.9% 64.8%;
+        --accent: 24 9.8% 15%;
+        --accent-foreground: 0 0% 95%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 95%;
+        --border: 24 9.8% 20%;
+        --input: 24 9.8% 20%;
+        --ring: 24 100% 50%;
+    }
+    
+  .bhagwa {
+        --background: 25 35% 8%;
+        --foreground: 35 100% 95%;
+        --card: 20 25% 12%;
+        --card-foreground: 35 100% 95%;
+        --popover: 20 25% 12%;
+        --popover-foreground: 35 100% 95%;
+        --primary: 24 100% 58%;
+        --primary-foreground: 0 0% 0%;
+        --secondary: 20 25% 18%;
+        --secondary-foreground: 35 100% 95%;
+        --muted: 20 25% 18%;
+        --muted-foreground: 24 10% 70%;
+        --accent: 20 25% 18%;
+        --accent-foreground: 35 100% 95%;
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 20 20% 25%;
+        --input: 20 20% 25%;
+        --ring: 24 100% 58%;
+    }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+}
