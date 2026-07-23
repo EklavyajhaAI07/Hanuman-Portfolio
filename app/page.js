@@ -146,38 +146,74 @@ function Navigation({ currentPage, setCurrentPage, isMobileMenuOpen, setIsMobile
 function HomePage({ setCurrentPage }) {
   return (
     <div className="space-y-12">
-      {/* Hero Section */}
+      {/* Hero Section with Background */}
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-lg"
+        className="relative overflow-hidden rounded-2xl"
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-red-600/20" />
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/3519190/pexels-photo-3519190.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+            alt="Lord Hanuman"
+            className="w-full h-full object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-orange-500/40 via-red-600/30 to-amber-600/40 backdrop-blur-sm" />
+        </div>
+        
         <div className="relative px-8 py-24 md:py-32 text-center">
+          {/* Decorative Elements */}
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            className="absolute top-10 right-10 w-20 h-20 border-2 border-orange-500/30 rounded-full"
+          />
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-10 left-10 w-16 h-16 border-2 border-red-500/30 rounded-full"
+          />
+          
           <motion.h1
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.7 }}
+            className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 bg-clip-text text-transparent drop-shadow-lg"
           >
             श्री हनुमान ज्ञान कोष
           </motion.h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl md:text-3xl font-semibold mb-4 text-foreground drop-shadow"
+          >
             A Complete Encyclopedia of Lord Hanuman
-          </p>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Explore the divine life, teachings, and scriptures of Pawanputra Hanuman with complete source citations
-          </p>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <Button size="lg" onClick={() => setCurrentPage('leelas')} className="gap-2">
+          </motion.p>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="text-base md:text-lg text-foreground/90 max-w-2xl mx-auto mb-8"
+          >
+            Explore the divine life, teachings, and scriptures of Pawanputra Hanuman with complete source citations from authentic texts
+          </motion.p>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="flex gap-4 justify-center flex-wrap"
+          >
+            <Button size="lg" onClick={() => setCurrentPage('leelas')} className="gap-2 shadow-lg hover:shadow-xl transition-shadow">
               <Sparkles className="h-5 w-5" />
               Explore Divine Leelas
             </Button>
-            <Button size="lg" variant="outline" onClick={() => setCurrentPage('timeline')} className="gap-2">
+            <Button size="lg" variant="outline" onClick={() => setCurrentPage('timeline')} className="gap-2 shadow-lg hover:shadow-xl transition-shadow backdrop-blur-sm">
               <Clock className="h-5 w-5" />
               View Timeline
             </Button>
-          </div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -188,12 +224,19 @@ function HomePage({ setCurrentPage }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setCurrentPage('leelas')}>
+          <Card className="cursor-pointer hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group border-2 hover:border-orange-500/50" onClick={() => setCurrentPage('leelas')}>
+            <div className="h-48 overflow-hidden">
+              <img 
+                src="https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                alt="Divine Leelas"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
             <CardHeader>
-              <div className="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center mb-4 group-hover:bg-orange-500/30 transition-colors">
                 <Sparkles className="h-6 w-6 text-orange-500" />
               </div>
-              <CardTitle>Divine Leelas</CardTitle>
+              <CardTitle className="group-hover:text-orange-500 transition-colors">Divine Leelas</CardTitle>
               <CardDescription>
                 Explore the miraculous deeds and divine plays of Lord Hanuman from various scriptures
               </CardDescription>
@@ -206,12 +249,19 @@ function HomePage({ setCurrentPage }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setCurrentPage('powers')}>
+          <Card className="cursor-pointer hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group border-2 hover:border-red-500/50" onClick={() => setCurrentPage('powers')}>
+            <div className="h-48 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85"
+                alt="Powers & Siddhis"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
             <CardHeader>
-              <div className="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center mb-4 group-hover:bg-red-500/30 transition-colors">
                 <Sparkles className="h-6 w-6 text-red-500" />
               </div>
-              <CardTitle>Powers & Siddhis</CardTitle>
+              <CardTitle className="group-hover:text-red-500 transition-colors">Powers & Siddhis</CardTitle>
               <CardDescription>
                 Discover the eight supernatural powers and abilities blessed to Hanuman
               </CardDescription>
@@ -224,12 +274,19 @@ function HomePage({ setCurrentPage }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setCurrentPage('teachings')}>
+          <Card className="cursor-pointer hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden group border-2 hover:border-amber-500/50" onClick={() => setCurrentPage('teachings')}>
+            <div className="h-48 overflow-hidden">
+              <img 
+                src="https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                alt="Sacred Teachings"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
             <CardHeader>
-              <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center mb-4 group-hover:bg-amber-500/30 transition-colors">
                 <Book className="h-6 w-6 text-amber-500" />
               </div>
-              <CardTitle>Sacred Teachings</CardTitle>
+              <CardTitle className="group-hover:text-amber-500 transition-colors">Sacred Teachings</CardTitle>
               <CardDescription>
                 Learn the profound spiritual lessons from Hanuman's life and devotion
               </CardDescription>
@@ -240,30 +297,33 @@ function HomePage({ setCurrentPage }) {
 
       {/* Quick Stats */}
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-orange-500">10+</div>
-            <div className="text-sm text-muted-foreground">Divine Leelas</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-red-500">5+</div>
-            <div className="text-sm text-muted-foreground">Sacred Powers</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-amber-500">3+</div>
-            <div className="text-sm text-muted-foreground">Core Teachings</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <div className="text-3xl font-bold text-orange-600">5+</div>
-            <div className="text-sm text-muted-foreground">Sacred Temples</div>
-          </CardContent>
-        </Card>
+        {[
+          { value: '10+', label: 'Divine Leelas', color: 'orange', delay: 0.1 },
+          { value: '5+', label: 'Sacred Powers', color: 'red', delay: 0.2 },
+          { value: '3+', label: 'Core Teachings', color: 'amber', delay: 0.3 },
+          { value: '5+', label: 'Sacred Temples', color: 'orange', delay: 0.4 }
+        ].map((stat, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: stat.delay, type: "spring" }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <Card className="text-center hover:shadow-lg transition-shadow cursor-pointer border-2 hover:border-orange-500/30">
+              <CardContent className="pt-6">
+                <motion.div
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  className={`text-4xl font-bold text-${stat.color}-500 mb-2`}
+                >
+                  {stat.value}
+                </motion.div>
+                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
       </section>
     </div>
   );
@@ -288,39 +348,81 @@ function TimelinePage() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-12">Loading timeline...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full"
+        />
+      </div>
+    );
   }
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Complete Timeline</h2>
-        <p className="text-muted-foreground">Chronological journey through Lord Hanuman's divine life</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        {/* Decorative background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+          Complete Timeline
+        </h2>
+        <p className="text-muted-foreground text-lg">Chronological journey through Lord Hanuman's divine life</p>
+      </motion.div>
 
-      <div className="relative">
-        {/* Timeline line */}
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 to-red-600" />
+      <div className="relative max-w-4xl mx-auto">
+        {/* Animated Timeline line */}
+        <motion.div 
+          initial={{ height: 0 }}
+          animate={{ height: '100%' }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-orange-500 via-red-600 to-amber-500"
+        />
 
         <div className="space-y-8">
           {events.map((event, index) => (
             <motion.div
               key={event.id}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.15, type: "spring" }}
               className="relative pl-20"
             >
-              <div className="absolute left-6 w-5 h-5 rounded-full bg-orange-500 border-4 border-background" />
+              {/* Animated dot */}
+              <motion.div 
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: index * 0.15 + 0.3, type: "spring" }}
+                className="absolute left-5 w-7 h-7 rounded-full bg-gradient-to-br from-orange-500 to-red-600 border-4 border-background shadow-lg"
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                  className="absolute inset-0 rounded-full bg-orange-500/50"
+                />
+              </motion.div>
               
-              <Card>
+              <Card className="hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-l-4 border-l-orange-500">
                 <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <CardTitle>{event.title}</CardTitle>
-                      <CardDescription>{event.summary}</CardDescription>
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <CardTitle className="text-xl mb-2">{event.title}</CardTitle>
+                      <CardDescription className="text-base">{event.summary}</CardDescription>
                     </div>
-                    <Badge variant="secondary">{event.era}</Badge>
+                    <div className="flex flex-col gap-2">
+                      <Badge variant="secondary" className="whitespace-nowrap">{event.era}</Badge>
+                      <Badge className="whitespace-nowrap bg-orange-500/20 text-orange-700 dark:text-orange-300 border-orange-500/50">
+                        {event.category}
+                      </Badge>
+                    </div>
                   </div>
                 </CardHeader>
               </Card>
@@ -356,69 +458,113 @@ function LeelasPage({ setSelectedEvent }) {
     : events.filter(e => e.category === filter);
 
   if (loading) {
-    return <div className="text-center py-12">Loading divine leelas...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full"
+        />
+      </div>
+    );
   }
+
+  const categoryImages = {
+    birth: 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    leela: 'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    blessing: 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
+    relationship: 'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
+    teaching: 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  };
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Divine Leelas</h2>
-        <p className="text-muted-foreground">Miraculous deeds and divine plays of Lord Hanuman</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+          Divine Leelas
+        </h2>
+        <p className="text-muted-foreground text-lg">Miraculous deeds and divine plays of Lord Hanuman</p>
+      </motion.div>
 
       {/* Filters */}
-      <div className="flex gap-2 flex-wrap justify-center">
-        <Button
-          variant={filter === 'all' ? 'default' : 'outline'}
-          onClick={() => setFilter('all')}
-        >
-          All
-        </Button>
-        <Button
-          variant={filter === 'birth' ? 'default' : 'outline'}
-          onClick={() => setFilter('birth')}
-        >
-          Birth
-        </Button>
-        <Button
-          variant={filter === 'leela' ? 'default' : 'outline'}
-          onClick={() => setFilter('leela')}
-        >
-          Leelas
-        </Button>
-        <Button
-          variant={filter === 'blessing' ? 'default' : 'outline'}
-          onClick={() => setFilter('blessing')}
-        >
-          Blessings
-        </Button>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex gap-2 flex-wrap justify-center"
+      >
+        {[
+          { id: 'all', label: 'All', icon: '🙏' },
+          { id: 'birth', label: 'Birth', icon: '✨' },
+          { id: 'leela', label: 'Leelas', icon: '⚡' },
+          { id: 'blessing', label: 'Blessings', icon: '🌟' }
+        ].map(cat => (
+          <Button
+            key={cat.id}
+            variant={filter === cat.id ? 'default' : 'outline'}
+            onClick={() => setFilter(cat.id)}
+            className="gap-2 transition-all"
+          >
+            <span>{cat.icon}</span>
+            {cat.label}
+          </Button>
+        ))}
+      </motion.div>
 
       {/* Events Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredEvents.map((event, index) => (
           <motion.div
             key={event.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: index * 0.1 }}
+            whileHover={{ y: -8 }}
           >
             <Card 
-              className="cursor-pointer hover:shadow-lg transition-shadow h-full"
+              className="cursor-pointer hover:shadow-2xl transition-all duration-300 h-full overflow-hidden group border-2 hover:border-orange-500/50"
               onClick={() => setSelectedEvent(event)}
             >
-              <CardHeader>
-                <div className="flex items-start justify-between mb-2">
-                  <Badge>{event.category}</Badge>
-                  <Badge variant="outline">{event.era}</Badge>
+              {/* Image Header */}
+              <div className="h-48 overflow-hidden relative">
+                <img
+                  src={categoryImages[event.category] || categoryImages.leela}
+                  alt={event.title}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                  <Badge className="bg-background/90 backdrop-blur-sm">{event.category}</Badge>
+                  <Badge variant="outline" className="bg-background/90 backdrop-blur-sm">{event.era}</Badge>
                 </div>
-                <CardTitle className="text-xl">{event.title}</CardTitle>
-                <CardDescription className="line-clamp-3">{event.summary}</CardDescription>
+              </div>
+              
+              <CardHeader>
+                <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
+                  {event.title}
+                </CardTitle>
+                <CardDescription className="line-clamp-3 text-base">
+                  {event.summary}
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-sm text-muted-foreground">
-                  <div className="font-semibold text-orange-500">{event.scripture}</div>
-                  <div>{event.section}, Chapter {event.chapter}</div>
+                <div className="text-sm text-muted-foreground space-y-1">
+                  <div className="font-semibold text-orange-500 flex items-center gap-2">
+                    <Book className="h-4 w-4" />
+                    {event.scripture}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs">
+                    <FileText className="h-3 w-3" />
+                    {event.section}, Ch. {event.chapter}
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -448,43 +594,101 @@ function PowersPage() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-12">Loading powers...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full"
+        />
+      </div>
+    );
   }
+
+  const powerIcons = ['⚡', '🌟', '💫', '✨', '🔥'];
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Powers & Siddhis</h2>
-        <p className="text-muted-foreground">Supernatural abilities blessed to Lord Hanuman</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <motion.div
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-6xl mb-4"
+        >
+          ⚡
+        </motion.div>
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-red-500 to-orange-600 bg-clip-text text-transparent">
+          Powers & Siddhis
+        </h2>
+        <p className="text-muted-foreground text-lg">Supernatural abilities blessed to Lord Hanuman</p>
+      </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {powers.map((power, index) => (
           <motion.div
             key={power.id}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.1 }}
+            initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+            animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ delay: index * 0.15, type: "spring" }}
+            whileHover={{ scale: 1.02, y: -5 }}
           >
-            <Card className="h-full">
+            <Card className="h-full relative overflow-hidden group border-2 hover:border-red-500/50 transition-all duration-300 hover:shadow-2xl">
+              {/* Decorative background */}
+              <div className="absolute top-0 right-0 text-8xl opacity-5 group-hover:opacity-10 transition-opacity">
+                {powerIcons[index % powerIcons.length]}
+              </div>
+              
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-orange-500" />
-                  {power.title}
-                </CardTitle>
-                <CardDescription>{power.description}</CardDescription>
+                <div className="flex items-start gap-4">
+                  <motion.div
+                    whileHover={{ rotate: 360 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-14 h-14 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-2xl flex-shrink-0 shadow-lg"
+                  >
+                    {powerIcons[index % powerIcons.length]}
+                  </motion.div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-2 group-hover:text-red-500 transition-colors">
+                      {power.title}
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      {power.description}
+                    </CardDescription>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm">{power.details}</p>
+                <p className="text-sm leading-relaxed">{power.details}</p>
                 {power.powers && (
                   <div className="flex flex-wrap gap-2">
-                    {power.powers.map(p => (
-                      <Badge key={p} variant="secondary">{p}</Badge>
+                    {power.powers.map((p, i) => (
+                      <motion.div
+                        key={p}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.15 + i * 0.05 }}
+                      >
+                        <Badge variant="secondary" className="hover:bg-red-500/20 transition-colors">
+                          {p}
+                        </Badge>
+                      </motion.div>
                     ))}
                   </div>
                 )}
                 <div className="pt-4 border-t">
-                  <div className="text-sm font-semibold text-orange-500">{power.scripture}</div>
+                  <div className="flex items-center gap-2 text-sm font-semibold text-red-500">
+                    <Book className="h-4 w-4" />
+                    {power.scripture}
+                  </div>
                   <div className="text-sm text-muted-foreground">{power.verse}</div>
                 </div>
               </CardContent>
@@ -800,44 +1004,96 @@ function RelationshipsPage() {
 
 // Gallery Page
 function GalleryPage() {
+  const [selectedImage, setSelectedImage] = useState(null);
+  
   const images = [
-    { id: 1, url: 'https://images.pexels.com/photos/3519190/pexels-photo-3519190.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Lord Hanuman' },
-    { id: 2, url: 'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Divine Form' },
-    { id: 3, url: 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Sacred Temple' },
-    { id: 4, url: 'https://images.pexels.com/photos/36526508/pexels-photo-36526508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Temple Architecture' },
-    { id: 5, url: 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', title: 'Devotion' },
-    { id: 6, url: 'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', title: 'Prayer' },
-    { id: 7, url: 'https://images.unsplash.com/photo-1662104249831-233d41ef4d33?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHx0ZW1wbGUlMjBzcGlyaXR1YWx8ZW58MHx8fG9yYW5nZXwxNzg0ODIwOTAzfDA&ixlib=rb-4.1.0&q=85', title: 'Spiritual' },
-    { id: 8, url: 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Meditation' }
+    { id: 1, url: 'https://images.pexels.com/photos/3519190/pexels-photo-3519190.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Lord Hanuman', category: 'Divine' },
+    { id: 2, url: 'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Divine Form', category: 'Divine' },
+    { id: 3, url: 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Sacred Temple', category: 'Temples' },
+    { id: 4, url: 'https://images.pexels.com/photos/36526508/pexels-photo-36526508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Temple Architecture', category: 'Temples' },
+    { id: 5, url: 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', title: 'Devotion', category: 'Spiritual' },
+    { id: 6, url: 'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', title: 'Prayer', category: 'Spiritual' },
+    { id: 7, url: 'https://images.unsplash.com/photo-1662104249831-233d41ef4d33?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHx0ZW1wbGUlMjBzcGlyaXR1YWx8ZW58MHx8fG9yYW5nZXwxNzg0ODIwOTAzfDA&ixlib=rb-4.1.0&q=85', title: 'Spiritual', category: 'Spiritual' },
+    { id: 8, url: 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', title: 'Meditation', category: 'Spiritual' }
   ];
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Gallery</h2>
-        <p className="text-muted-foreground">Divine images and temple photographs</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <motion.div
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="text-6xl mb-4 inline-block"
+        >
+          🖼️
+        </motion.div>
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+          Sacred Gallery
+        </h2>
+        <p className="text-muted-foreground text-lg">Divine images and temple photographs</p>
+      </motion.div>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {images.map((image, index) => (
           <motion.div
             key={image.id}
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.05 }}
-            className="group relative aspect-square overflow-hidden rounded-lg cursor-pointer"
+            transition={{ delay: index * 0.08, type: "spring" }}
+            whileHover={{ scale: 1.05, zIndex: 10 }}
+            className="group relative aspect-square overflow-hidden rounded-xl cursor-pointer shadow-lg hover:shadow-2xl transition-shadow"
+            onClick={() => setSelectedImage(image)}
           >
             <img
               src={image.url}
               alt={image.title}
-              className="w-full h-full object-cover transition-transform group-hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-              <p className="text-white font-semibold">{image.title}</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end p-4">
+              <p className="text-white font-bold text-lg mb-1">{image.title}</p>
+              <Badge variant="secondary" className="bg-white/90 backdrop-blur-sm">
+                {image.category}
+              </Badge>
             </div>
+            
+            {/* Decorative corner */}
+            <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-orange-500 opacity-0 group-hover:opacity-100 transition-opacity" />
           </motion.div>
         ))}
       </div>
+
+      {/* Image Modal */}
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-4xl">
+          {selectedImage && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl">{selectedImage.title}</DialogTitle>
+                <DialogDescription>
+                  <Badge>{selectedImage.category}</Badge>
+                </DialogDescription>
+              </DialogHeader>
+              <div className="relative aspect-video rounded-lg overflow-hidden">
+                <img
+                  src={selectedImage.url}
+                  alt={selectedImage.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
@@ -961,80 +1217,148 @@ function AIChat({ isOpen, onClose }) {
     }
   };
 
+  const suggestedQuestions = [
+    "Tell me about Hanuman's birth",
+    "What are the eight siddhis?",
+    "How did Hanuman cross the ocean?",
+    "What are Hanuman's teachings?"
+  ];
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] flex flex-col">
-        <DialogHeader>
-          <DialogTitle>Ask About Lord Hanuman</DialogTitle>
-          <DialogDescription>
-            Ask questions about scriptures, teachings, and divine leelas
-          </DialogDescription>
+      <DialogContent className="max-w-3xl max-h-[85vh] flex flex-col p-0 gap-0 bg-gradient-to-br from-background to-orange-50/10 dark:to-orange-950/10">
+        <DialogHeader className="px-6 py-4 border-b bg-gradient-to-r from-orange-500/10 to-red-500/10">
+          <div className="flex items-center gap-3">
+            <motion.div
+              animate={{ rotate: [0, 360] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white text-xl"
+            >
+              🙏
+            </motion.div>
+            <div>
+              <DialogTitle className="text-xl">Ask About Lord Hanuman</DialogTitle>
+              <DialogDescription>
+                Get answers from authentic scriptures with citations
+              </DialogDescription>
+            </div>
+          </div>
         </DialogHeader>
 
-        <ScrollArea className="flex-1 pr-4">
+        <ScrollArea className="flex-1 px-6 py-4">
           <div className="space-y-4">
             {messages.length === 0 && (
-              <div className="text-center text-muted-foreground py-8">
-                <MessageCircle className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                <p>Ask me anything about Lord Hanuman</p>
-                <p className="text-sm mt-2">I'll answer based on authentic scriptures</p>
+              <div className="text-center py-8">
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="text-6xl mb-4"
+                >
+                  🕉️
+                </motion.div>
+                <p className="text-lg font-semibold mb-2">Ask me anything about Lord Hanuman</p>
+                <p className="text-sm text-muted-foreground mb-6">I'll answer based on authentic scriptures</p>
+                
+                <div className="space-y-2 max-w-md mx-auto">
+                  <p className="text-xs font-semibold text-muted-foreground mb-2">SUGGESTED QUESTIONS:</p>
+                  {suggestedQuestions.map((q, i) => (
+                    <motion.button
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      onClick={() => setInput(q)}
+                      className="w-full text-left px-4 py-2 text-sm bg-muted hover:bg-orange-500/10 rounded-lg transition-colors border border-transparent hover:border-orange-500/30"
+                    >
+                      💬 {q}
+                    </motion.button>
+                  ))}
+                </div>
               </div>
             )}
 
             {messages.map((msg, index) => (
-              <div
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
                 className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-4 ${
+                  className={`max-w-[85%] rounded-2xl p-4 shadow-lg ${
                     msg.role === 'user'
-                      ? 'bg-orange-500 text-white'
-                      : 'bg-muted'
+                      ? 'bg-gradient-to-br from-orange-500 to-red-600 text-white'
+                      : 'bg-card border-2 border-orange-500/20'
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                  <p className="text-sm whitespace-pre-wrap leading-relaxed">{msg.content}</p>
                   
                   {msg.sources && msg.sources.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-border/50">
-                      <p className="text-xs font-semibold mb-2">Sources:</p>
+                    <motion.div 
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="mt-4 pt-4 border-t border-border/50 space-y-2"
+                    >
+                      <p className="text-xs font-bold flex items-center gap-2">
+                        <Book className="h-3 w-3" />
+                        SCRIPTURE SOURCES:
+                      </p>
                       {msg.sources.map((source, i) => (
-                        <div key={i} className="text-xs mb-1">
-                          • {source.title} - {source.scripture}
-                          {source.chapter && ` (Ch. ${source.chapter}, V. ${source.verse})`}
+                        <div key={i} className="text-xs bg-background/50 rounded p-2">
+                          📖 <strong>{source.title}</strong> - {source.scripture}
+                          {source.chapter && ` (Chapter ${source.chapter}, Verse ${source.verse})`}
                         </div>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
 
             {loading && (
-              <div className="flex justify-start">
-                <div className="bg-muted rounded-lg p-4">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex justify-start"
+              >
+                <div className="bg-card border-2 border-orange-500/20 rounded-2xl p-4 shadow-lg">
                   <div className="flex gap-2">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce" />
-                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce delay-100" />
-                    <div className="w-2 h-2 bg-orange-500 rounded-full animate-bounce delay-200" />
+                    {[0, 1, 2].map(i => (
+                      <motion.div
+                        key={i}
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.2 }}
+                        className="w-2 h-2 bg-orange-500 rounded-full"
+                      />
+                    ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         </ScrollArea>
 
-        <div className="flex gap-2 pt-4">
-          <Input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-            placeholder="Ask about scriptures, teachings, powers..."
-            disabled={loading}
-          />
-          <Button onClick={sendMessage} disabled={loading || !input.trim()}>
-            Send
-          </Button>
+        <div className="border-t bg-background/50 backdrop-blur-sm p-4">
+          <div className="flex gap-2">
+            <Input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage()}
+              placeholder="Ask about scriptures, teachings, powers..."
+              disabled={loading}
+              className="border-2 focus:border-orange-500"
+            />
+            <Button 
+              onClick={sendMessage} 
+              disabled={loading || !input.trim()}
+              size="lg"
+              className="px-6"
+            >
+              <span className="mr-2">Send</span>
+              ➤
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
@@ -1168,13 +1492,33 @@ export default function App() {
       </main>
 
       {/* Floating Chat Button */}
-      <Button
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg"
-        size="icon"
-        onClick={() => setIsChatOpen(true)}
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 1, type: "spring" }}
+        className="fixed bottom-6 right-6 z-50"
       >
-        <MessageCircle className="h-6 w-6" />
-      </Button>
+        <div className="relative">
+          {/* Pulse effect */}
+          <motion.div
+            animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="absolute inset-0 rounded-full bg-orange-500"
+          />
+          <Button
+            className="relative h-16 w-16 rounded-full shadow-2xl bg-gradient-to-br from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700"
+            size="icon"
+            onClick={() => setIsChatOpen(true)}
+          >
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <MessageCircle className="h-7 w-7" />
+            </motion.div>
+          </Button>
+        </div>
+      </motion.div>
 
       {/* AI Chat Dialog */}
       <AIChat isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
