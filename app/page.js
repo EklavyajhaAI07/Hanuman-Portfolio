@@ -719,43 +719,94 @@ function TeachingsPage() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-12">Loading teachings...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full"
+        />
+      </div>
+    );
   }
+
+  const teachingImages = [
+    'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
+    'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85'
+  ];
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Sacred Teachings</h2>
-        <p className="text-muted-foreground">Profound spiritual lessons from Hanuman's life</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <motion.div
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-6xl mb-4"
+        >
+          📿
+        </motion.div>
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+          Sacred Teachings
+        </h2>
+        <p className="text-muted-foreground text-lg">Profound spiritual lessons from Hanuman's life</p>
+      </motion.div>
 
       <div className="space-y-6">
         {teachings.map((teaching, index) => (
           <motion.div
             key={teaching.id}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
+            transition={{ delay: index * 0.15, type: "spring" }}
+            whileHover={{ x: 10 }}
           >
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Book className="h-5 w-5 text-amber-500" />
-                  {teaching.title}
-                </CardTitle>
-                <CardDescription className="text-base font-semibold">
-                  {teaching.teaching}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p>{teaching.description}</p>
-                <div className="bg-muted p-4 rounded-lg">
-                  <p className="italic text-sm">&ldquo;{teaching.quote}&rdquo;</p>
+            <Card className="overflow-hidden border-2 hover:border-amber-500/50 transition-all duration-300 hover:shadow-2xl">
+              <div className="md:flex">
+                {/* Image Section */}
+                <div className="md:w-1/3 h-64 md:h-auto overflow-hidden relative group">
+                  <img
+                    src={teachingImages[index % teachingImages.length]}
+                    alt={teaching.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-orange-500/20" />
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Source: {teaching.scripture}
+                
+                {/* Content Section */}
+                <div className="md:w-2/3">
+                  <CardHeader>
+                    <CardTitle className="text-2xl flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center flex-shrink-0">
+                        <Book className="h-6 w-6 text-white" />
+                      </div>
+                      {teaching.title}
+                    </CardTitle>
+                    <CardDescription className="text-base font-semibold mt-3 text-amber-600 dark:text-amber-400">
+                      {teaching.teaching}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-base leading-relaxed">{teaching.description}</p>
+                    <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/50 dark:to-orange-950/50 p-4 rounded-lg border-l-4 border-amber-500">
+                      <p className="italic text-sm">&ldquo;{teaching.quote}&rdquo;</p>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2">
+                      <FileText className="h-4 w-4" />
+                      Source: <span className="font-semibold text-amber-600 dark:text-amber-400">{teaching.scripture}</span>
+                    </div>
+                  </CardContent>
                 </div>
-              </CardContent>
+              </div>
             </Card>
           </motion.div>
         ))}
@@ -867,64 +918,153 @@ function PlacesPage() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-12">Loading sacred places...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full"
+        />
+      </div>
+    );
   }
+
+  const templeImages = [
+    'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.pexels.com/photos/36526508/pexels-photo-36526508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.unsplash.com/photo-1662104249831-233d41ef4d33?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHx0ZW1wbGUlMjBzcGlyaXR1YWx8ZW58MHx8fG9yYW5nZXwxNzg0ODIwOTAzfDA&ixlib=rb-4.1.0&q=85',
+    'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.pexels.com/photos/36526508/pexels-photo-36526508.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  ];
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Sacred Places</h2>
-        <p className="text-muted-foreground">Temples and pilgrimage sites of Lord Hanuman</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <motion.div
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-6xl mb-4"
+        >
+          🛕
+        </motion.div>
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+          Sacred Places
+        </h2>
+        <p className="text-muted-foreground text-lg">Temples and pilgrimage sites of Lord Hanuman</p>
+      </motion.div>
 
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Simple Map Placeholder */}
-        <Card className="p-6">
-          <h3 className="font-semibold mb-4">Temple Locations</h3>
-          <div className="relative bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950 dark:to-red-950 rounded-lg p-8 min-h-[400px] flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="h-16 w-16 text-orange-500 mx-auto mb-4" />
-              <p className="text-muted-foreground">Interactive India map with temple markers</p>
-              <div className="mt-4 space-y-2">
-                {temples.map(temple => (
-                  <button
-                    key={temple.id}
-                    onClick={() => setSelectedTemple(temple)}
-                    className="block w-full text-left px-4 py-2 hover:bg-background/50 rounded"
-                  >
-                    <div className="font-semibold">{temple.name}</div>
-                    <div className="text-sm text-muted-foreground">{temple.location}</div>
-                  </button>
-                ))}
+        {/* Interactive Map Section */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ type: "spring" }}
+        >
+          <Card className="p-6 h-full border-2 hover:border-orange-500/50 transition-all">
+            <h3 className="font-semibold mb-4 text-xl flex items-center gap-2">
+              <MapPin className="h-6 w-6 text-orange-500" />
+              Temple Locations Across India
+            </h3>
+            <div className="relative bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 rounded-lg p-8 min-h-[500px] flex items-center justify-center border-2 border-orange-500/20">
+              <div className="text-center space-y-4">
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="text-7xl"
+                >
+                  🗺️
+                </motion.div>
+                <p className="text-muted-foreground font-medium">Interactive India map with temple markers</p>
+                <div className="mt-6 space-y-2">
+                  {temples.map((temple, index) => (
+                    <motion.button
+                      key={temple.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => setSelectedTemple(temple)}
+                      className={`block w-full text-left px-4 py-3 rounded-lg transition-all ${
+                        selectedTemple?.id === temple.id
+                          ? 'bg-orange-500 text-white shadow-lg'
+                          : 'bg-background/70 hover:bg-orange-500/10 border border-orange-500/20'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <MapPin className="h-5 w-5 flex-shrink-0" />
+                        <div className="flex-1 min-w-0">
+                          <div className="font-semibold truncate">{temple.name}</div>
+                          <div className="text-sm opacity-90 truncate">{temple.location}</div>
+                        </div>
+                      </div>
+                    </motion.button>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </Card>
+          </Card>
+        </motion.div>
 
-        {/* Temple List */}
+        {/* Temple Cards */}
         <div className="space-y-4">
           {temples.map((temple, index) => (
             <motion.div
               key={temple.id}
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.15, type: "spring" }}
+              whileHover={{ x: -5 }}
             >
               <Card 
-                className={`cursor-pointer transition-all ${selectedTemple?.id === temple.id ? 'ring-2 ring-orange-500' : ''}`}
+                className={`cursor-pointer transition-all duration-300 overflow-hidden border-2 ${
+                  selectedTemple?.id === temple.id 
+                    ? 'ring-4 ring-orange-500/50 border-orange-500 shadow-2xl' 
+                    : 'hover:border-orange-500/50 hover:shadow-xl'
+                }`}
                 onClick={() => setSelectedTemple(temple)}
               >
+                {/* Temple Image */}
+                <div className="h-48 overflow-hidden relative group">
+                  <img
+                    src={templeImages[index % templeImages.length]}
+                    alt={temple.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-3 left-3">
+                    <Badge className="bg-orange-500 text-white shadow-lg">
+                      Sacred Temple
+                    </Badge>
+                  </div>
+                </div>
+
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5 text-orange-500" />
+                  <CardTitle className="text-xl flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
+                      🛕
+                    </div>
                     {temple.name}
                   </CardTitle>
-                  <CardDescription>{temple.location}</CardDescription>
+                  <CardDescription className="text-base flex items-center gap-2">
+                    <MapPin className="h-4 w-4" />
+                    {temple.location}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm mb-2">{temple.description}</p>
-                  <div className="text-sm text-muted-foreground">
-                    <strong>Significance:</strong> {temple.significance}
+                <CardContent className="space-y-3">
+                  <p className="text-sm leading-relaxed">{temple.description}</p>
+                  <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50 p-3 rounded-lg border-l-4 border-orange-500">
+                    <p className="text-sm">
+                      <strong className="text-orange-600 dark:text-orange-400">Significance:</strong>{' '}
+                      {temple.significance}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -955,42 +1095,94 @@ function RelationshipsPage() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-12">Loading relationships...</div>;
+    return (
+      <div className="flex items-center justify-center py-12">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full"
+        />
+      </div>
+    );
   }
+
+  const relationshipImages = [
+    'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
+    'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    'https://images.unsplash.com/photo-1662104249831-233d41ef4d33?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHx0ZW1wbGUlMjBzcGlyaXR1YWx8ZW58MHx8fG9yYW5nZXwxNzg0ODIwOTAzfDA&ixlib=rb-4.1.0&q=85',
+    'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  ];
 
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Divine Relationships</h2>
-        <p className="text-muted-foreground">Connections with gods, family, and devotees</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <motion.div
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="text-6xl mb-4"
+        >
+          👥
+        </motion.div>
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-red-600 bg-clip-text text-transparent">
+          Divine Relationships
+        </h2>
+        <p className="text-muted-foreground text-lg">Connections with gods, family, and devotees</p>
+      </motion.div>
 
       <div className="grid md:grid-cols-2 gap-6">
         {relationships.map((rel, index) => (
           <motion.div
             key={rel.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: index * 0.15, type: "spring" }}
+            whileHover={{ y: -8, scale: 1.02 }}
           >
-            <Card className="h-full">
+            <Card className="h-full overflow-hidden border-2 hover:border-orange-500/50 transition-all duration-300 hover:shadow-2xl group">
+              {/* Image Header */}
+              <div className="h-48 overflow-hidden relative">
+                <img
+                  src={relationshipImages[index % relationshipImages.length]}
+                  alt={rel.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <Badge variant="secondary" className="bg-background/90 backdrop-blur-sm">
+                    {rel.relation}
+                  </Badge>
+                </div>
+              </div>
+
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Users className="h-5 w-5 text-orange-500" />
+                <CardTitle className="text-xl flex items-center gap-3 group-hover:text-orange-500 transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0">
+                    <Users className="h-5 w-5 text-white" />
+                  </div>
                   {rel.name}
                 </CardTitle>
-                <CardDescription className="font-semibold">{rel.relation}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-sm">{rel.description}</p>
+                <p className="text-sm leading-relaxed">{rel.description}</p>
                 {rel.quote && (
-                  <div className="bg-muted p-4 rounded-lg">
+                  <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/50 dark:to-red-950/50 p-4 rounded-lg border-l-4 border-orange-500">
                     <p className="italic text-sm">&ldquo;{rel.quote}&rdquo;</p>
                   </div>
                 )}
                 {rel.scripture && (
-                  <div className="text-sm text-muted-foreground">
-                    Source: {rel.scripture}
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground pt-2">
+                    <Book className="h-4 w-4" />
+                    Source: <span className="font-semibold text-orange-600 dark:text-orange-400">{rel.scripture}</span>
                   </div>
                 )}
               </CardContent>
@@ -1102,67 +1294,151 @@ function GalleryPage() {
 function ReferencesPage() {
   return (
     <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">References</h2>
-        <p className="text-muted-foreground">Primary sources and bibliography</p>
-      </div>
+      <motion.div 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-center relative"
+      >
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 right-1/4 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl" />
+        </div>
+        
+        <motion.div
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="text-6xl mb-4 inline-block"
+        >
+          📚
+        </motion.div>
+        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-orange-500 to-amber-600 bg-clip-text text-transparent">
+          References & Sources
+        </h2>
+        <p className="text-muted-foreground text-lg">Primary scriptures and bibliography</p>
+      </motion.div>
 
-      <div className="space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Primary Scriptures</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-orange-500">Valmiki Ramayana</h4>
-              <p className="text-sm text-muted-foreground">
-                The oldest Sanskrit epic, contains detailed accounts of Hanuman's role in Rama's quest
-              </p>
+      <div className="space-y-6 max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <Card className="overflow-hidden border-2 hover:border-orange-500/50 transition-all">
+            <div className="bg-gradient-to-r from-orange-500/10 to-red-500/10 p-6 border-b">
+              <CardTitle className="text-2xl flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
+                  📖
+                </div>
+                Primary Scriptures
+              </CardTitle>
             </div>
-            <Separator />
-            <div>
-              <h4 className="font-semibold text-orange-500">Hanuman Chalisa</h4>
-              <p className="text-sm text-muted-foreground">
-                40-verse hymn by Tulsidas in praise of Hanuman's virtues and powers
-              </p>
-            </div>
-            <Separator />
-            <div>
-              <h4 className="font-semibold text-orange-500">Mahabharata</h4>
-              <p className="text-sm text-muted-foreground">
-                Contains episodes of Hanuman in Dvapara Yuga, including his meeting with Bhima
-              </p>
-            </div>
-            <Separator />
-            <div>
-              <h4 className="font-semibold text-orange-500">Shiva Purana</h4>
-              <p className="text-sm text-muted-foreground">
-                Describes Hanuman as an aspect of Lord Shiva
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+            <CardContent className="p-6 space-y-5">
+              {[
+                {
+                  title: 'Valmiki Ramayana',
+                  description: 'The oldest Sanskrit epic, contains detailed accounts of Hanuman\'s role in Rama\'s quest to rescue Sita',
+                  icon: '📜'
+                },
+                {
+                  title: 'Hanuman Chalisa',
+                  description: '40-verse hymn by Tulsidas in praise of Hanuman\'s virtues and powers',
+                  icon: '🙏'
+                },
+                {
+                  title: 'Mahabharata',
+                  description: 'Contains episodes of Hanuman in Dvapara Yuga, including his meeting with Bhima',
+                  icon: '⚔️'
+                },
+                {
+                  title: 'Shiva Purana',
+                  description: 'Describes Hanuman as an aspect of Lord Shiva with divine attributes',
+                  icon: '🕉️'
+                }
+              ].map((scripture, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1 }}
+                  className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 p-4 rounded-lg border-l-4 border-orange-500 hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="text-3xl">{scripture.icon}</div>
+                    <div className="flex-1">
+                      <h4 className="font-bold text-lg text-orange-600 dark:text-orange-400 mb-1">
+                        {scripture.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {scripture.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Methodology</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-sm">
-              All information presented on this platform is sourced from authentic Sanskrit scriptures with proper citations including:
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <Card className="overflow-hidden border-2 hover:border-amber-500/50 transition-all">
+            <div className="bg-gradient-to-r from-amber-500/10 to-orange-500/10 p-6 border-b">
+              <CardTitle className="text-2xl flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center">
+                  🔍
+                </div>
+                Research Methodology
+              </CardTitle>
+            </div>
+            <CardContent className="p-6 space-y-5">
+              <p className="text-base leading-relaxed">
+                All information presented on this platform is sourced from authentic Sanskrit scriptures with proper citations including:
+              </p>
+              <div className="grid md:grid-cols-2 gap-4">
+                {[
+                  { icon: '📚', text: 'Scripture name and section' },
+                  { icon: '📖', text: 'Chapter and verse numbers' },
+                  { icon: '🔤', text: 'Original Sanskrit text' },
+                  { icon: '🌐', text: 'Hindi and English translations' },
+                  { icon: '📜', text: 'Historical context' },
+                  { icon: '🎓', text: 'Scholarly interpretations' }
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.6 + index * 0.05 }}
+                    className="flex items-center gap-3 bg-background/50 p-3 rounded-lg border border-orange-500/20"
+                  >
+                    <div className="text-2xl">{item.icon}</div>
+                    <div className="text-sm font-medium">{item.text}</div>
+                  </motion.div>
+                ))}
+              </div>
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 p-4 rounded-lg border-l-4 border-amber-500 mt-4">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  <strong className="text-amber-600 dark:text-amber-400">Note:</strong> When multiple versions or interpretations exist, they are presented side by side for scholarly comparison, maintaining transparency and academic integrity.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="text-center py-8"
+        >
+          <div className="inline-block bg-gradient-to-r from-orange-500/10 to-red-500/10 px-8 py-4 rounded-full border-2 border-orange-500/20">
+            <p className="text-lg font-bold text-orange-600 dark:text-orange-400">
+              🕉️ All content verified from authentic Hindu scriptures 🕉️
             </p>
-            <ul className="list-disc list-inside text-sm space-y-2 text-muted-foreground">
-              <li>Scripture name and section</li>
-              <li>Chapter and verse numbers</li>
-              <li>Original Sanskrit text where available</li>
-              <li>Hindi and English translations</li>
-              <li>Historical and cultural context</li>
-            </ul>
-            <p className="text-sm text-muted-foreground">
-              When multiple versions or interpretations exist, they are presented side by side for scholarly comparison.
-            </p>
-          </CardContent>
-        </Card>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
@@ -1369,68 +1645,116 @@ function AIChat({ isOpen, onClose }) {
 function EventDetailDialog({ event, isOpen, onClose }) {
   if (!event) return null;
 
+  const categoryImages = {
+    birth: 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    leela: 'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    blessing: 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
+    relationship: 'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
+    teaching: 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="text-2xl">{event.title}</DialogTitle>
-          <div className="flex gap-2 mt-2">
-            <Badge>{event.category}</Badge>
-            <Badge variant="outline">{event.era}</Badge>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+        {/* Hero Image */}
+        <div className="relative h-64 -mx-6 -mt-6 mb-6 overflow-hidden">
+          <img
+            src={categoryImages[event.category] || categoryImages.leela}
+            alt={event.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          <div className="absolute bottom-6 left-6 right-6">
+            <div className="flex gap-2 mb-3">
+              <Badge className="bg-orange-500 text-white shadow-lg">{event.category}</Badge>
+              <Badge variant="outline" className="bg-background/90 backdrop-blur-sm shadow-lg">{event.era}</Badge>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
+              {event.title}
+            </h2>
           </div>
-        </DialogHeader>
+        </div>
 
         <div className="space-y-6">
           <div>
-            <h4 className="font-semibold mb-2">Summary</h4>
-            <p className="text-muted-foreground">{event.summary}</p>
+            <h4 className="font-semibold text-lg mb-2 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-orange-500" />
+              Summary
+            </h4>
+            <p className="text-muted-foreground text-base">{event.summary}</p>
           </div>
 
           <Separator />
 
           <div>
-            <h4 className="font-semibold mb-2">Description</h4>
-            <p>{event.description}</p>
+            <h4 className="font-semibold text-lg mb-3 flex items-center gap-2">
+              <FileText className="h-5 w-5 text-orange-500" />
+              Description
+            </h4>
+            <p className="leading-relaxed text-base">{event.description}</p>
           </div>
 
           <Separator />
 
-          <div className="bg-muted p-4 rounded-lg space-y-3">
+          <div className="bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 p-6 rounded-xl border-2 border-orange-500/20 space-y-4">
             <div>
-              <h4 className="font-semibold text-orange-500 mb-2">Scripture Reference</h4>
-              <p className="text-sm">
-                <strong>{event.scripture}</strong> • {event.section} • Chapter {event.chapter} • Verse {event.verse}
-              </p>
+              <h4 className="font-bold text-lg mb-3 flex items-center gap-2 text-orange-600 dark:text-orange-400">
+                <Book className="h-5 w-5" />
+                Scripture Reference
+              </h4>
+              <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+                <div className="bg-background/50 p-3 rounded-lg">
+                  <div className="font-semibold text-xs text-muted-foreground mb-1">Scripture</div>
+                  <div className="font-bold">{event.scripture}</div>
+                </div>
+                <div className="bg-background/50 p-3 rounded-lg">
+                  <div className="font-semibold text-xs text-muted-foreground mb-1">Section</div>
+                  <div className="font-bold">{event.section}</div>
+                </div>
+                <div className="bg-background/50 p-3 rounded-lg">
+                  <div className="font-semibold text-xs text-muted-foreground mb-1">Chapter</div>
+                  <div className="font-bold">{event.chapter}</div>
+                </div>
+                <div className="bg-background/50 p-3 rounded-lg">
+                  <div className="font-semibold text-xs text-muted-foreground mb-1">Verse</div>
+                  <div className="font-bold">{event.verse}</div>
+                </div>
+              </div>
             </div>
 
             {event.sanskrit && (
-              <div>
-                <h5 className="text-sm font-semibold mb-1">Sanskrit:</h5>
-                <p className="text-sm italic">{event.sanskrit}</p>
+              <div className="bg-background/70 p-4 rounded-lg">
+                <h5 className="text-sm font-bold mb-2 text-orange-600 dark:text-orange-400">Sanskrit:</h5>
+                <p className="text-sm italic leading-relaxed">{event.sanskrit}</p>
               </div>
             )}
 
             {event.hindi && (
-              <div>
-                <h5 className="text-sm font-semibold mb-1">Hindi:</h5>
-                <p className="text-sm">{event.hindi}</p>
+              <div className="bg-background/70 p-4 rounded-lg">
+                <h5 className="text-sm font-bold mb-2 text-orange-600 dark:text-orange-400">Hindi Translation:</h5>
+                <p className="text-sm leading-relaxed">{event.hindi}</p>
               </div>
             )}
 
             {event.english && (
-              <div>
-                <h5 className="text-sm font-semibold mb-1">English:</h5>
-                <p className="text-sm">{event.english}</p>
+              <div className="bg-background/70 p-4 rounded-lg">
+                <h5 className="text-sm font-bold mb-2 text-orange-600 dark:text-orange-400">English Translation:</h5>
+                <p className="text-sm leading-relaxed">{event.english}</p>
               </div>
             )}
           </div>
 
           {event.relatedCharacters && event.relatedCharacters.length > 0 && (
             <div>
-              <h4 className="font-semibold mb-2">Related Characters</h4>
+              <h4 className="font-semibold mb-3 flex items-center gap-2">
+                <Users className="h-5 w-5 text-orange-500" />
+                Related Characters
+              </h4>
               <div className="flex flex-wrap gap-2">
                 {event.relatedCharacters.map(char => (
-                  <Badge key={char} variant="secondary">{char}</Badge>
+                  <Badge key={char} variant="secondary" className="text-base py-1 px-3">
+                    {char}
+                  </Badge>
                 ))}
               </div>
             </div>
@@ -1438,10 +1762,15 @@ function EventDetailDialog({ event, isOpen, onClose }) {
 
           {event.relatedPlaces && event.relatedPlaces.length > 0 && (
             <div>
-              <h4 className="font-semibold mb-2">Related Places</h4>
+              <h4 className="font-semibold mb-3 flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-orange-500" />
+                Related Places
+              </h4>
               <div className="flex flex-wrap gap-2">
                 {event.relatedPlaces.map(place => (
-                  <Badge key={place} variant="outline">{place}</Badge>
+                  <Badge key={place} variant="outline" className="text-base py-1 px-3">
+                    {place}
+                  </Badge>
                 ))}
               </div>
             </div>
