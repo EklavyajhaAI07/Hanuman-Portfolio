@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 import { scriptureEvents, powers, teachings, temples, relationships, hanumanChalisa } from '@/lib/data/scriptureData';
 
+export const dynamic = 'force-dynamic';
+
 let client;
 let db;
 
@@ -137,6 +139,9 @@ async function chatWithAI(message, conversationHistory = []) {
 
 export async function GET(request) {
   try {
+    if (!request || !request.url) {
+      return NextResponse.json({ error: 'Request URL is missing' }, { status: 400 });
+    }
     const url = new URL(request.url);
     const pathname = url.pathname || '';
     const searchParams = url.searchParams;
@@ -261,6 +266,9 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    if (!request || !request.url) {
+      return NextResponse.json({ error: 'Request URL is missing' }, { status: 400 });
+    }
     const url = new URL(request.url);
     const pathname = url.pathname || '';
     const path = pathname.replace('/api', '');
@@ -313,6 +321,9 @@ export async function POST(request) {
 
 export async function DELETE(request) {
   try {
+    if (!request || !request.url) {
+      return NextResponse.json({ error: 'Request URL is missing' }, { status: 400 });
+    }
     const url = new URL(request.url);
     const pathname = url.pathname || '';
     const path = pathname.replace('/api', '');
