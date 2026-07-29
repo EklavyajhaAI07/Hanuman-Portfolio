@@ -471,16 +471,16 @@ function LeelasPage({ setSelectedEvent }) {
 
   // Specific images for each event based on content
   const eventSpecificImages = {
-    '1': 'https://cdn.pixabay.com/photo/2018/06/04/06/57/religion-3452576_1280.jpg', // Birth - divine origin
+    '1': 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Birth - divine origin
     '2': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Swallowing Sun - fire/sun
-    '3': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Meeting Rama - devotion
-    '4': 'https://images.unsplash.com/photo-1590787936240-0e9c7e71594d?fm=jpg&q=60&w=3000&auto=format&fit=crop', // Ocean crossing - water
-    '5': 'https://cdn.pixabay.com/photo/2017/08/11/10/04/zen-2630221_1280.jpg', // Ashoka Vatika - garden/nature
+    '3': 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', // Meeting Rama - devotion
+    '4': 'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Ocean crossing - water
+    '5': 'https://images.pexels.com/photos/3573351/pexels-photo-3573351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Ashoka Vatika - garden/nature
     '6': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Burning Lanka - fire
-    '7': 'https://images.pexels.com/photos/552783/pexels-photo-552783.jpeg', // Sanjeevani mountain - mountain/strength
-    '8': 'https://cdn.pixabay.com/photo/2018/06/04/06/56/religion-3452582_1280.jpg', // Rama's embrace - blessing
-    '9': 'https://cdn.pixabay.com/photo/2018/11/16/07/26/theravada-buddhism-3818886_1280.jpg', // Meeting Bhima - encounter
-    '10': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg' // Pearl necklace - teaching/wisdom
+    '7': 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Sanjeevani mountain - mountain/strength
+    '8': 'https://images.pexels.com/photos/3519190/pexels-photo-3519190.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Rama's embrace - blessing
+    '9': 'https://images.pexels.com/photos/6591438/pexels-photo-6591438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Meeting Bhima - encounter
+    '10': 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' // Pearl necklace - teaching/wisdom
   };
 
   return (
@@ -738,9 +738,9 @@ function TeachingsPage() {
 
   // Specific images for each teaching based on content
   const teachingSpecificImages = {
-    't1': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Surrender to God - prayer/devotion
-    't2': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg', // Humility - monk/wisdom
-    't3': 'https://cdn.pixabay.com/photo/2017/08/11/10/04/zen-2630221_1280.jpg' // Self-control - zen/meditation
+    't1': 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', // Surrender to God - prayer/devotion
+    't2': 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Humility - monk/wisdom
+    't3': 'https://images.pexels.com/photos/3573351/pexels-photo-3573351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' // Self-control - zen/meditation
   };
 
   return (
@@ -1115,11 +1115,11 @@ function RelationshipsPage() {
 
   // Specific images for each relationship based on content
   const relationshipSpecificImages = {
-    'r1': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Lord Rama - devotion/prayer
-    'r2': 'https://cdn.pixabay.com/photo/2018/06/04/06/56/religion-3452582_1280.jpg', // Sita Mata - blessing/grace
-    'r3': 'https://cdn.pixabay.com/photo/2018/06/04/06/57/religion-3452576_1280.jpg', // Anjana (Mother) - divine birth
+    'r1': 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', // Lord Rama - devotion/prayer
+    'r2': 'https://images.pexels.com/photos/3519190/pexels-photo-3519190.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Sita Mata - blessing/grace
+    'r3': 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Anjana (Mother) - divine birth
     'r4': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Vayu (Father) - wind/power
-    'r5': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg' // Lord Shiva - meditation/spiritual
+    'r5': 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' // Lord Shiva - meditation/spiritual
   };
 
   return (
@@ -1655,16 +1655,16 @@ function EventDetailDialog({ event, isOpen, onClose }) {
 
   // Specific images for each event based on content
   const eventSpecificImages = {
-    '1': 'https://cdn.pixabay.com/photo/2018/06/04/06/57/religion-3452576_1280.jpg', // Birth - divine origin
+    '1': 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Birth - divine origin
     '2': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Swallowing Sun - fire/sun
-    '3': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Meeting Rama - devotion
-    '4': 'https://images.unsplash.com/photo-1590787936240-0e9c7e71594d?fm=jpg&q=60&w=3000&auto=format&fit=crop', // Ocean crossing - water
-    '5': 'https://cdn.pixabay.com/photo/2017/08/11/10/04/zen-2630221_1280.jpg', // Ashoka Vatika - garden/nature
+    '3': 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85', // Meeting Rama - devotion
+    '4': 'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Ocean crossing - water
+    '5': 'https://images.pexels.com/photos/3573351/pexels-photo-3573351.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Ashoka Vatika - garden/nature
     '6': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Burning Lanka - fire
-    '7': 'https://images.pexels.com/photos/552783/pexels-photo-552783.jpeg', // Sanjeevani mountain - mountain/strength
-    '8': 'https://cdn.pixabay.com/photo/2018/06/04/06/56/religion-3452582_1280.jpg', // Rama's embrace - blessing
-    '9': 'https://cdn.pixabay.com/photo/2018/11/16/07/26/theravada-buddhism-3818886_1280.jpg', // Meeting Bhima - encounter
-    '10': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg' // Pearl necklace - teaching/wisdom
+    '7': 'https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Sanjeevani mountain - mountain/strength
+    '8': 'https://images.pexels.com/photos/3519190/pexels-photo-3519190.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Rama's embrace - blessing
+    '9': 'https://images.pexels.com/photos/6591438/pexels-photo-6591438.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', // Meeting Bhima - encounter
+    '10': 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940' // Pearl necklace - teaching/wisdom
   };
 
   return (
