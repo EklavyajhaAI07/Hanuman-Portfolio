@@ -10,7 +10,7 @@ import sys
 from typing import Dict, Any
 
 # Base URL from environment
-BASE_URL = "https://afe69854-54f0-4c9e-81a4-6e119a8bc4b7.preview.emergentagent.com/api"
+BASE_URL = "https://divine-hanuman-hub.preview.emergentagent.com/api"
 
 class Colors:
     GREEN = '\033[92m'

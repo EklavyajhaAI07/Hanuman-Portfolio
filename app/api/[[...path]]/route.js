@@ -2,13 +2,24 @@ import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 import { scriptureEvents, powers, teachings, temples, relationships, hanumanChalisa } from '@/lib/data/scriptureData';
 
-const client = new MongoClient(process.env.MONGO_URL);
+let client;
 let db;
 
 async function connectDB() {
+  if (!process.env.MONGO_URL) {
+    console.warn('MONGO_URL not configured');
+    return null;
+  }
+  
   if (!db) {
-    await client.connect();
-    db = client.db(process.env.DB_NAME);
+    try {
+      client = new MongoClient(process.env.MONGO_URL);
+      await client.connect();
+      db = client.db(process.env.DB_NAME || 'hanuman_knowledge');
+    } catch (error) {
+      console.error('MongoDB connection error:', error);
+      return null;
+    }
   }
   return db;
 }
@@ -125,10 +136,12 @@ async function chatWithAI(message, conversationHistory = []) {
 }
 
 export async function GET(request) {
-  const { pathname, searchParams } = new URL(request.url);
-  const path = pathname.replace('/api', '') || '/';
-
   try {
+    const url = new URL(request.url);
+    const pathname = url.pathname || '';
+    const searchParams = url.searchParams;
+    const path = pathname.replace('/api', '') || '/';
+  
     // Health check
     if (path === '/' || path === '') {
       return NextResponse.json({ message: 'Hanuman Knowledge Base API is running', status: 'ok' });
@@ -228,8 +241,11 @@ export async function GET(request) {
 
     // Get bookmarks
     if (path === '/bookmarks') {
-      const db = await connectDB();
-      const bookmarks = await db.collection('bookmarks').find({}).toArray();
+      const database = await connectDB();
+      if (!database) {
+        return NextResponse.json({ bookmarks: [] });
+      }
+      const bookmarks = await database.collection('bookmarks').find({}).toArray();
       return NextResponse.json({ bookmarks });
     }
 
@@ -244,10 +260,10 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const { pathname } = new URL(request.url);
-  const path = pathname.replace('/api', '');
-
   try {
+    const url = new URL(request.url);
+    const pathname = url.pathname || '';
+    const path = pathname.replace('/api', '');
     const body = await request.json();
 
     // AI Chat endpoint
@@ -270,14 +286,18 @@ export async function POST(request) {
         return NextResponse.json({ error: 'Event ID required' }, { status: 400 });
       }
 
-      const db = await connectDB();
+      const database = await connectDB();
+      if (!database) {
+        return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+      }
+
       const bookmark = {
         eventId,
         userId: userId || 'anonymous',
         createdAt: new Date()
       };
       
-      await db.collection('bookmarks').insertOne(bookmark);
+      await database.collection('bookmarks').insertOne(bookmark);
       return NextResponse.json({ success: true, bookmark });
     }
 
@@ -292,15 +312,19 @@ export async function POST(request) {
 }
 
 export async function DELETE(request) {
-  const { pathname } = new URL(request.url);
-  const path = pathname.replace('/api', '');
-
   try {
+    const url = new URL(request.url);
+    const pathname = url.pathname || '';
+    const path = pathname.replace('/api', '');
+
     // Delete bookmark
     if (path.startsWith('/bookmarks/')) {
       const id = path.split('/')[2];
-      const db = await connectDB();
-      await db.collection('bookmarks').deleteOne({ eventId: id });
+      const database = await connectDB();
+      if (!database) {
+        return NextResponse.json({ error: 'Database not available' }, { status: 503 });
+      }
+      await database.collection('bookmarks').deleteOne({ eventId: id });
       return NextResponse.json({ success: true });
     }
 
