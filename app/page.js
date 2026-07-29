@@ -469,12 +469,18 @@ function LeelasPage({ setSelectedEvent }) {
     );
   }
 
-  const categoryImages = {
-    birth: 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    leela: 'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    blessing: 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
-    relationship: 'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
-    teaching: 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  // Specific images for each event based on content
+  const eventSpecificImages = {
+    '1': 'https://cdn.pixabay.com/photo/2018/06/04/06/57/religion-3452576_1280.jpg', // Birth - divine origin
+    '2': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Swallowing Sun - fire/sun
+    '3': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Meeting Rama - devotion
+    '4': 'https://images.unsplash.com/photo-1590787936240-0e9c7e71594d?fm=jpg&q=60&w=3000&auto=format&fit=crop', // Ocean crossing - water
+    '5': 'https://cdn.pixabay.com/photo/2017/08/11/10/04/zen-2630221_1280.jpg', // Ashoka Vatika - garden/nature
+    '6': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Burning Lanka - fire
+    '7': 'https://images.pexels.com/photos/552783/pexels-photo-552783.jpeg', // Sanjeevani mountain - mountain/strength
+    '8': 'https://cdn.pixabay.com/photo/2018/06/04/06/56/religion-3452582_1280.jpg', // Rama's embrace - blessing
+    '9': 'https://cdn.pixabay.com/photo/2018/11/16/07/26/theravada-buddhism-3818886_1280.jpg', // Meeting Bhima - encounter
+    '10': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg' // Pearl necklace - teaching/wisdom
   };
 
   return (
@@ -533,14 +539,14 @@ function LeelasPage({ setSelectedEvent }) {
               className="cursor-pointer hover:shadow-2xl transition-all duration-300 h-full overflow-hidden group border-2 hover:border-orange-500/50"
               onClick={() => setSelectedEvent(event)}
             >
-              {/* Image Header */}
+              {/* Image Header - Specific to each event */}
               <div className="h-48 overflow-hidden relative">
                 <img
-                  src={categoryImages[event.category] || categoryImages.leela}
+                  src={eventSpecificImages[event.id] || eventSpecificImages['1']}
                   alt={event.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
                   <Badge className="bg-background/90 backdrop-blur-sm">{event.category}</Badge>
                   <Badge variant="outline" className="bg-background/90 backdrop-blur-sm">{event.era}</Badge>
@@ -730,11 +736,12 @@ function TeachingsPage() {
     );
   }
 
-  const teachingImages = [
-    'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
-    'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85'
-  ];
+  // Specific images for each teaching based on content
+  const teachingSpecificImages = {
+    't1': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Surrender to God - prayer/devotion
+    't2': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg', // Humility - monk/wisdom
+    't3': 'https://cdn.pixabay.com/photo/2017/08/11/10/04/zen-2630221_1280.jpg' // Self-control - zen/meditation
+  };
 
   return (
     <div className="space-y-8">
@@ -772,10 +779,10 @@ function TeachingsPage() {
           >
             <Card className="overflow-hidden border-2 hover:border-amber-500/50 transition-all duration-300 hover:shadow-2xl">
               <div className="md:flex">
-                {/* Image Section */}
+                {/* Image Section - Specific to each teaching */}
                 <div className="md:w-1/3 h-64 md:h-auto overflow-hidden relative group">
                   <img
-                    src={teachingImages[index % teachingImages.length]}
+                    src={teachingSpecificImages[teaching.id] || teachingSpecificImages['t1']}
                     alt={teaching.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -1106,13 +1113,14 @@ function RelationshipsPage() {
     );
   }
 
-  const relationshipImages = [
-    'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
-    'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    'https://images.unsplash.com/photo-1662104249831-233d41ef4d33?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwyfHx0ZW1wbGUlMjBzcGlyaXR1YWx8ZW58MHx8fG9yYW5nZXwxNzg0ODIwOTAzfDA&ixlib=rb-4.1.0&q=85',
-    'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-  ];
+  // Specific images for each relationship based on content
+  const relationshipSpecificImages = {
+    'r1': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Lord Rama - devotion/prayer
+    'r2': 'https://cdn.pixabay.com/photo/2018/06/04/06/56/religion-3452582_1280.jpg', // Sita Mata - blessing/grace
+    'r3': 'https://cdn.pixabay.com/photo/2018/06/04/06/57/religion-3452576_1280.jpg', // Anjana (Mother) - divine birth
+    'r4': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Vayu (Father) - wind/power
+    'r5': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg' // Lord Shiva - meditation/spiritual
+  };
 
   return (
     <div className="space-y-8">
@@ -1149,10 +1157,10 @@ function RelationshipsPage() {
             whileHover={{ y: -8, scale: 1.02 }}
           >
             <Card className="h-full overflow-hidden border-2 hover:border-orange-500/50 transition-all duration-300 hover:shadow-2xl group">
-              {/* Image Header */}
+              {/* Image Header - Specific to each relationship */}
               <div className="h-48 overflow-hidden relative">
                 <img
-                  src={relationshipImages[index % relationshipImages.length]}
+                  src={relationshipSpecificImages[rel.id] || relationshipSpecificImages['r1']}
                   alt={rel.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
@@ -1645,21 +1653,27 @@ function AIChat({ isOpen, onClose }) {
 function EventDetailDialog({ event, isOpen, onClose }) {
   if (!event) return null;
 
-  const categoryImages = {
-    birth: 'https://images.pexels.com/photos/14367176/pexels-photo-14367176.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    leela: 'https://images.pexels.com/photos/9691182/pexels-photo-9691182.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-    blessing: 'https://images.unsplash.com/photo-1596550933678-4e760b4bf87b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwxfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
-    relationship: 'https://images.unsplash.com/photo-1649779241200-ef4de69147a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwyfHxkZXZvdGlvbiUyMHByYXllcnxlbnwwfHx8b3JhbmdlfDE3ODQ4MjA5MTB8MA&ixlib=rb-4.1.0&q=85',
-    teaching: 'https://images.pexels.com/photos/37655777/pexels-photo-37655777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+  // Specific images for each event based on content
+  const eventSpecificImages = {
+    '1': 'https://cdn.pixabay.com/photo/2018/06/04/06/57/religion-3452576_1280.jpg', // Birth - divine origin
+    '2': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Swallowing Sun - fire/sun
+    '3': 'https://cdn.pixabay.com/photo/2020/07/15/03/49/praying-5406270_1280.jpg', // Meeting Rama - devotion
+    '4': 'https://images.unsplash.com/photo-1590787936240-0e9c7e71594d?fm=jpg&q=60&w=3000&auto=format&fit=crop', // Ocean crossing - water
+    '5': 'https://cdn.pixabay.com/photo/2017/08/11/10/04/zen-2630221_1280.jpg', // Ashoka Vatika - garden/nature
+    '6': 'https://images.pexels.com/photos/1558916/pexels-photo-1558916.jpeg', // Burning Lanka - fire
+    '7': 'https://images.pexels.com/photos/552783/pexels-photo-552783.jpeg', // Sanjeevani mountain - mountain/strength
+    '8': 'https://cdn.pixabay.com/photo/2018/06/04/06/56/religion-3452582_1280.jpg', // Rama's embrace - blessing
+    '9': 'https://cdn.pixabay.com/photo/2018/11/16/07/26/theravada-buddhism-3818886_1280.jpg', // Meeting Bhima - encounter
+    '10': 'https://cdn.pixabay.com/photo/2022/09/19/14/53/monk-7465763_1280.jpg' // Pearl necklace - teaching/wisdom
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-        {/* Hero Image */}
+        {/* Hero Image - Specific to each event */}
         <div className="relative h-64 -mx-6 -mt-6 mb-6 overflow-hidden">
           <img
-            src={categoryImages[event.category] || categoryImages.leela}
+            src={eventSpecificImages[event.id] || eventSpecificImages['1']}
             alt={event.title}
             className="w-full h-full object-cover"
           />
